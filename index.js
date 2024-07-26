@@ -15,7 +15,7 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 dotenv.config();
 app.use(cors());
@@ -40,6 +40,6 @@ app.listen(PORT, () => {
 
 // using this server creating, defining route
 
-app.use("/home", (req, res) => {
-  res.send("HI this is shanus");
+app.use("/", (req, res) => {
+  res.send("HI this is shanus welcome to SUBY");
 });
