@@ -42,10 +42,13 @@ const addFirm = async (req, res) => {
 
     const savedFirm = await firm.save();
 
-    vendor.firm.push(savedFirm._id);
+    // to get firm id while adding product
+    const firmId = savedFirm._id;
+
+    vendor.firm.push(savedFirm);
     await vendor.save();
 
-    return res.status(200).json({ message: "Firm added successfully" });
+    return res.status(200).json({ message: "Firm added successfully", firmId });
   } catch (error) {
     console.log(error);
     res.status(500).json("Internal Server Error");
@@ -67,4 +70,7 @@ const deleteFirmById = async (req, res) => {
   }
 };
 
-module.exports = { addFirm: [upload.single("image"), addFirm], deleteFirmById };
+module.exports = {
+  addFirm: [upload.single("firmImage"), addFirm],
+  deleteFirmById,
+};
